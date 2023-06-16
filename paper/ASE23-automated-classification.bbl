@@ -1,0 +1,749 @@
+%% BioMed_Central_Bib_Style_v1.01
+
+\begin{thebibliography}{51}
+% BibTex style file: bmc-mathphys.bst (version 2.1), 2014-07-24
+\ifx \bisbn   \undefined \def \bisbn  #1{ISBN #1}\fi
+\ifx \binits  \undefined \def \binits#1{#1}\fi
+\ifx \bauthor  \undefined \def \bauthor#1{#1}\fi
+\ifx \batitle  \undefined \def \batitle#1{#1}\fi
+\ifx \bjtitle  \undefined \def \bjtitle#1{#1}\fi
+\ifx \bvolume  \undefined \def \bvolume#1{\textbf{#1}}\fi
+\ifx \byear  \undefined \def \byear#1{#1}\fi
+\ifx \bissue  \undefined \def \bissue#1{#1}\fi
+\ifx \bfpage  \undefined \def \bfpage#1{#1}\fi
+\ifx \blpage  \undefined \def \blpage #1{#1}\fi
+\ifx \burl  \undefined \def \burl#1{\textsf{#1}}\fi
+\ifx \doiurl  \undefined \def \doiurl#1{\url{https://doi.org/#1}}\fi
+\ifx \betal  \undefined \def \betal{\textit{et al.}}\fi
+\ifx \binstitute  \undefined \def \binstitute#1{#1}\fi
+\ifx \binstitutionaled  \undefined \def \binstitutionaled#1{#1}\fi
+\ifx \bctitle  \undefined \def \bctitle#1{#1}\fi
+\ifx \beditor  \undefined \def \beditor#1{#1}\fi
+\ifx \bpublisher  \undefined \def \bpublisher#1{#1}\fi
+\ifx \bbtitle  \undefined \def \bbtitle#1{#1}\fi
+\ifx \bedition  \undefined \def \bedition#1{#1}\fi
+\ifx \bseriesno  \undefined \def \bseriesno#1{#1}\fi
+\ifx \blocation  \undefined \def \blocation#1{#1}\fi
+\ifx \bsertitle  \undefined \def \bsertitle#1{#1}\fi
+\ifx \bsnm \undefined \def \bsnm#1{#1}\fi
+\ifx \bsuffix \undefined \def \bsuffix#1{#1}\fi
+\ifx \bparticle \undefined \def \bparticle#1{#1}\fi
+\ifx \barticle \undefined \def \barticle#1{#1}\fi
+\bibcommenthead
+\ifx \bconfdate \undefined \def \bconfdate #1{#1}\fi
+\ifx \botherref \undefined \def \botherref #1{#1}\fi
+\ifx \url \undefined \def \url#1{\textsf{#1}}\fi
+\ifx \bchapter \undefined \def \bchapter#1{#1}\fi
+\ifx \bbook \undefined \def \bbook#1{#1}\fi
+\ifx \bcomment \undefined \def \bcomment#1{#1}\fi
+\ifx \oauthor \undefined \def \oauthor#1{#1}\fi
+\ifx \citeauthoryear \undefined \def \citeauthoryear#1{#1}\fi
+\ifx \endbibitem  \undefined \def \endbibitem {}\fi
+\ifx \bconflocation  \undefined \def \bconflocation#1{#1}\fi
+\ifx \arxivurl  \undefined \def \arxivurl#1{\textsf{#1}}\fi
+\csname PreBibitemsHook\endcsname
+
+%%% 1
+\bibitem[\protect\citeauthoryear{{Office Journal of the European
+  Union}}{2016}]{OfficeJournaloftheEuropeanUnion;2016}
+\begin{botherref}
+\oauthor{\bsnm{{Office Journal of the European Union}}}:
+{General Data Protection Regulation (GDPR)}.
+Technical report
+(2016).
+\url{https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32016R0679}
+\end{botherref}
+\endbibitem
+
+%%% 2
+\bibitem[\protect\citeauthoryear{{State of California Department of
+  Justice}}{2018}]{StateofCaliforniaDepartmentofJustice2018}
+\begin{botherref}
+\oauthor{\bsnm{{State of California Department of Justice}}}:
+{California Consumer Privacy Act (CCPA)}
+(2018).
+\url{https://oag.ca.gov/privacy/ccpa}
+\end{botherref}
+\endbibitem
+
+%%% 3
+\bibitem[\protect\citeauthoryear{{Data Privacy Manager}}{2020}]{Data}
+\begin{botherref}
+\oauthor{\bsnm{{Data Privacy Manager}}}:
+{5 biggest GDPR fines so far [2020] – Data Privacy Manager}
+(2020).
+\url{https://dataprivacymanager.net/5-biggest-gdpr-fines-so-far-2020/}
+Accessed 2020-03-24
+\end{botherref}
+\endbibitem
+
+%%% 4
+\bibitem[\protect\citeauthoryear{{European
+  Commission}}{2019}]{EuropeanCommission2019}
+\begin{botherref}
+\oauthor{\bsnm{{European Commission}}}:
+{GDPR IN NUMBERS 2019 {\#}HAPPYBIRTHDAYGDPR}.
+Technical report
+(2019)
+\end{botherref}
+\endbibitem
+
+%%% 5
+\bibitem[\protect\citeauthoryear{CNET}{2019}]{CNET}
+\begin{botherref}
+\oauthor{\bsnm{CNET}}:
+{British Airways faces {\$}230M GDPR fine for 2018 data breach}
+(2019).
+\url{https://cnet.co/2EHboiu}
+\end{botherref}
+\endbibitem
+
+%%% 6
+\bibitem[\protect\citeauthoryear{{Privacy Affairs}}{2020}]{PrivacyAffa}
+\begin{botherref}
+\oauthor{\bsnm{{Privacy Affairs}}}:
+{GDPR Fines List: Find all GDPR fines {\&} detailed statistics}
+(2020).
+\url{https://www.privacyaffairs.com/gdpr-fines/}
+\end{botherref}
+\endbibitem
+
+%%% 7
+\bibitem[\protect\citeauthoryear{BBC}{2020}]{InformationCommissionersOffice2020}
+\begin{botherref}
+\oauthor{\bsnm{BBC}}:
+{British Airways fined {\pounds}20m over data breach}
+(2020).
+\url{https://www.bbc.com/news/technology-54568784}
+\end{botherref}
+\endbibitem
+
+%%% 8
+\bibitem[\protect\citeauthoryear{Reuters}{2020}]{ICOMarriott}
+\begin{botherref}
+\oauthor{\bsnm{Reuters}}:
+{ICO fines Marriott 18.4 million pounds for failing to secure customer data}
+(2020).
+\url{https://www.reuters.com/article/us-marriott-intnl-ico-idUSKBN27F1LH}
+\end{botherref}
+\endbibitem
+
+%%% 9
+\bibitem[\protect\citeauthoryear{Swinhoe}{2020}]{Swinhoe2020}
+\begin{botherref}
+\oauthor{\bsnm{Swinhoe}, \binits{D.}}:
+{The 14 biggest data breaches of the 21st century}
+(2020).
+\url{https://www.csoonline.com/article/2130877/the-biggest-data-breaches-of-the-21st-century.html}
+Accessed 2020-03-29
+\end{botherref}
+\endbibitem
+
+%%% 10
+\bibitem[\protect\citeauthoryear{Choetkiertikul et~al.}{2021}]{Choetkiertikul}
+\begin{botherref}
+\oauthor{\bsnm{Choetkiertikul}, \binits{M.}},
+\oauthor{\bsnm{Dam}, \binits{H.K.}},
+\oauthor{\bsnm{Tran}, \binits{T.}},
+\oauthor{\bsnm{Pham}, \binits{T.}},
+\oauthor{\bsnm{Ragkhitwetsagul}, \binits{C.}},
+\oauthor{\bsnm{Ghose}, \binits{A.}}:
+{Automatically recommending components for issue reports using deep learning}.
+Empirical Software Engineering
+\textbf{26}(2)
+(2021)
+\doiurl{10.1007/s10664-020-09898-5}
+\end{botherref}
+\endbibitem
+
+%%% 11
+\bibitem[\protect\citeauthoryear{Choetkiertikul
+  et~al.}{2018}]{Choetkiertikul2018}
+\begin{botherref}
+\oauthor{\bsnm{Choetkiertikul}, \binits{M.}},
+\oauthor{\bsnm{Dam}, \binits{H.K.}},
+\oauthor{\bsnm{Tran}, \binits{T.}},
+\oauthor{\bsnm{Pham}, \binits{T.}},
+\oauthor{\bsnm{Ghose}, \binits{A.}}:
+{Poster: Predicting components for issue reports using deep learning with
+  information retrieval}.
+Proceedings - International Conference on Software Engineering,
+244--245
+(2018)
+\end{botherref}
+\endbibitem
+
+%%% 12
+\bibitem[\protect\citeauthoryear{Sangaroonsilp
+  et~al.}{2023}]{Sangaroonsilp2023}
+\begin{botherref}
+\oauthor{\bsnm{Sangaroonsilp}, \binits{P.}},
+\oauthor{\bsnm{Dam}, \binits{H.K.}},
+\oauthor{\bsnm{Choetkiertikul}, \binits{M.}},
+\oauthor{\bsnm{Ragkhitwetsagul}, \binits{C.}},
+\oauthor{\bsnm{Ghose}, \binits{A.}}:
+{A Taxonomy for Mining and Classifying Privacy Requirements in Issue Reports}.
+Information and Software Technology
+\textbf{157}
+(2023)
+\doiurl{10.1016/j.infsof.2023.107162}
+\end{botherref}
+\endbibitem
+
+%%% 13
+\bibitem[\protect\citeauthoryear{Tirilly et~al.}{2008}]{Tirilly2008}
+\begin{bchapter}
+\bauthor{\bsnm{Tirilly}, \binits{P.}},
+\bauthor{\bsnm{Claveau}, \binits{V.}},
+\bauthor{\bsnm{Gros}, \binits{P.}}:
+\bctitle{{Language modeling for bag-of-visual words image categorization}}.
+In: \bbtitle{Proceedings of the International Conference on Content-based Image
+  and Video Retrieval},
+pp. \bfpage{249}--\blpage{258}
+(\byear{2008})
+\end{bchapter}
+\endbibitem
+
+%%% 14
+\bibitem[\protect\citeauthoryear{Shirakawa et~al.}{2015}]{Shirakawa2015}
+\begin{bchapter}
+\bauthor{\bsnm{Shirakawa}, \binits{M.}},
+\bauthor{\bsnm{Hara}, \binits{T.}},
+\bauthor{\bsnm{Nishio}, \binits{S.}}:
+\bctitle{{N-gram IDF: A global term weighting scheme based on information
+  distance}}.
+In: \bbtitle{Proceedings of the 24th International Conference on World Wide
+  Web},
+pp. \bfpage{960}--\blpage{970}
+(\byear{2015})
+\end{bchapter}
+\endbibitem
+
+%%% 15
+\bibitem[\protect\citeauthoryear{Blei et~al.}{2003}]{blei2003latent}
+\begin{barticle}
+\bauthor{\bsnm{Blei}, \binits{D.M.}},
+\bauthor{\bsnm{Ng}, \binits{A.Y.}},
+\bauthor{\bsnm{Jordan}, \binits{M.I.}}:
+\batitle{{Latent dirichlet allocation}}.
+\bjtitle{The Journal of Machine Learning Research}
+\bvolume{3},
+\bfpage{993}--\blpage{1022}
+(\byear{2003})
+\end{barticle}
+\endbibitem
+
+%%% 16
+\bibitem[\protect\citeauthoryear{Mikolov et~al.}{2013}]{Mikolov2013}
+\begin{bchapter}
+\bauthor{\bsnm{Mikolov}, \binits{T.}},
+\bauthor{\bsnm{Chen}, \binits{K.}},
+\bauthor{\bsnm{Corrado}, \binits{G.}},
+\bauthor{\bsnm{Dean}, \binits{J.}}:
+\bctitle{{Efficient estimation of word representations in vector space}}.
+In: \bbtitle{1st International Conference on Learning Representations, ICLR
+  2013 - Workshop Track Proceedings}
+(\byear{2013})
+\end{bchapter}
+\endbibitem
+
+%%% 17
+\bibitem[\protect\citeauthoryear{Google}{2013}]{Google2013}
+\begin{botherref}
+\oauthor{\bsnm{Google}}:
+word2vec
+(2013).
+\url{https://code.google.com/archive/p/word2vec/}
+Accessed 2023-02-16
+\end{botherref}
+\endbibitem
+
+%%% 18
+\bibitem[\protect\citeauthoryear{Lee
+  et~al.}{2017}]{LeeMin-JaeHeoChan-GunLee2017}
+\begin{bchapter}
+\bauthor{\bsnm{Lee}, \binits{S.R.}},
+\bauthor{\bsnm{Heo}, \binits{M.J.}},
+\bauthor{\bsnm{Lee}, \binits{C.G.}},
+\bauthor{\bsnm{Kim}, \binits{M.}},
+\bauthor{\bsnm{Jeong}, \binits{G.}}:
+\bctitle{{Applying deep learning based automatic bug triager to industrial
+  projects}}.
+In: \bbtitle{Proceedings of the ACM SIGSOFT Symposium on the Foundations of
+  Software Engineering},
+vol. \bseriesno{Part F1301},
+pp. \bfpage{926}--\blpage{931}
+(\byear{2017}).
+\burl{https://doi.org/10.1145/3106237.3117776}
+\end{bchapter}
+\endbibitem
+
+%%% 19
+\bibitem[\protect\citeauthoryear{Devlin et~al.}{2018}]{Devlin2018}
+\begin{botherref}
+\oauthor{\bsnm{Devlin}, \binits{J.}},
+\oauthor{\bsnm{Chang}, \binits{M.W.}},
+\oauthor{\bsnm{Lee}, \binits{K.}},
+\oauthor{\bsnm{Toutanova}, \binits{K.}}:
+{BERT: Pre-training of deep bidirectional transformers for language
+  understanding}
+(2018).
+\url{https://arxiv.org/pdf/1810.04805.pdf}
+\end{botherref}
+\endbibitem
+
+%%% 20
+\bibitem[\protect\citeauthoryear{Sangaroonsilp et~al.}{2022}]{msrreplipkg}
+\begin{botherref}
+\oauthor{\bsnm{Sangaroonsilp}, \binits{P.}},
+\oauthor{\bsnm{Choetkiertikul}, \binits{M.}},
+\oauthor{\bsnm{Dam}, \binits{H.K.}},
+\oauthor{\bsnm{Ghose}, \binits{A.}}:
+{Replication Package for Automated Classification of Privacy Requirements in
+  Issue Reports}
+(2022).
+\url{http://bit.ly/AutomaticPRrecommendation}
+\end{botherref}
+\endbibitem
+
+%%% 21
+\bibitem[\protect\citeauthoryear{{United Nations Conference on Trade and
+  Development (UNCTAD)}}{2020}]{UNCTAD2020}
+\begin{botherref}
+\oauthor{\bsnm{{United Nations Conference on Trade and Development (UNCTAD)}}}:
+{Data Protection and Privacy Legislation Worldwide}
+(2020).
+\url{https://unctad.org/page/data-protection-and-privacy-legislation-worldwide}
+Accessed 2021-05-19
+\end{botherref}
+\endbibitem
+
+%%% 22
+\bibitem[\protect\citeauthoryear{G{\"{u}}rses et~al.}{2011}]{Gurses2011}
+\begin{bchapter}
+\bauthor{\bsnm{G{\"{u}}rses}, \binits{S.}},
+\bauthor{\bsnm{Troncoso}, \binits{C.}},
+\bauthor{\bsnm{Diaz}, \binits{C.}}:
+\bctitle{{Engineering Privacy by Design}}.
+In: \bbtitle{Computers, Privacy {\&} Data Protection},
+pp. \bfpage{1}--\blpage{25}
+(\byear{2011})
+\end{bchapter}
+\endbibitem
+
+%%% 23
+\bibitem[\protect\citeauthoryear{Ant{\'{o}}n and Earp}{2004}]{Antn2004}
+\begin{barticle}
+\bauthor{\bsnm{Ant{\'{o}}n}, \binits{A.I.}},
+\bauthor{\bsnm{Earp}, \binits{J.B.}}:
+\batitle{{A requirements taxonomy for reducing Web site privacy
+  vulnerabilities}}.
+\bjtitle{Requirements Engineering}
+\bvolume{9}(\bissue{3}),
+\bfpage{169}--\blpage{185}
+(\byear{2004})
+\end{barticle}
+\endbibitem
+
+%%% 24
+\bibitem[\protect\citeauthoryear{Ayala-Rivera and
+  Pasquale}{2018}]{Ayala-Rivera2018}
+\begin{bchapter}
+\bauthor{\bsnm{Ayala-Rivera}, \binits{V.}},
+\bauthor{\bsnm{Pasquale}, \binits{L.}}:
+\bctitle{{The grace period has ended: An approach to operationalize GDPR
+  requirements}}.
+In: \bbtitle{Proceedings - 2018 IEEE 26th International Requirements
+  Engineering Conference, RE 2018},
+pp. \bfpage{136}--\blpage{146}
+(\byear{2018})
+\end{bchapter}
+\endbibitem
+
+%%% 25
+\bibitem[\protect\citeauthoryear{M{\"{u}}ller et~al.}{2019}]{Muller2019}
+\begin{bchapter}
+\bauthor{\bsnm{M{\"{u}}ller}, \binits{N.M.}},
+\bauthor{\bsnm{Kowatsch}, \binits{D.}},
+\bauthor{\bsnm{Debus}, \binits{P.}},
+\bauthor{\bsnm{Mirdita}, \binits{D.}},
+\bauthor{\bsnm{B{\"{o}}ttinger}, \binits{K.}}:
+\bctitle{{On GDPR Compliance of Companies' Privacy Policies}}.
+In: \bbtitle{Lecture Notes in Computer Science (including Subseries Lecture
+  Notes in Artificial Intelligence and Lecture Notes in Bioinformatics)}
+vol. \bseriesno{11697},
+pp. \bfpage{151}--\blpage{159}
+(\byear{2019})
+\end{bchapter}
+\endbibitem
+
+%%% 26
+\bibitem[\protect\citeauthoryear{Torre et~al.}{2020}]{Torre}
+\begin{botherref}
+\oauthor{\bsnm{Torre}, \binits{D.}},
+\oauthor{\bsnm{Abualhaija}, \binits{S.}},
+\oauthor{\bsnm{Sabetzadeh}, \binits{M.}},
+\oauthor{\bsnm{Briand}, \binits{L.}},
+\oauthor{\bsnm{Baetens}, \binits{K.}},
+\oauthor{\bsnm{Goes}, \binits{P.}},
+\oauthor{\bsnm{Forastier}, \binits{S.}}:
+{An AI-assisted Approach for Checking the Completeness of Privacy Policies
+  Against GDPR}.
+2020 IEEE 28th International Requirements Engineering Conference (RE),
+136--146
+(2020)
+\end{botherref}
+\endbibitem
+
+%%% 27
+\bibitem[\protect\citeauthoryear{Bojanowski et~al.}{2017}]{Bojanowski2017}
+\begin{barticle}
+\bauthor{\bsnm{Bojanowski}, \binits{P.}},
+\bauthor{\bsnm{Grave}, \binits{E.}},
+\bauthor{\bsnm{Joulin}, \binits{A.}},
+\bauthor{\bsnm{Mikolov}, \binits{T.}}:
+\batitle{{Enriching Word Vectors with Subword Information}}.
+\bjtitle{Transactions of the Association for Computational Linguistics}
+\bvolume{5},
+\bfpage{135}--\blpage{146}
+(\byear{2017})
+\doiurl{10.1162/tacl_a_00051}
+{\href{https://arxiv.org/abs/1607.04606}{{arXiv:1607.04606}}}
+\end{barticle}
+\endbibitem
+
+%%% 28
+\bibitem[\protect\citeauthoryear{Peters et~al.}{2018}]{Peters2018}
+\begin{bchapter}
+\bauthor{\bsnm{Peters}, \binits{M.E.}},
+\bauthor{\bsnm{Neumann}, \binits{M.}},
+\bauthor{\bsnm{Iyyer}, \binits{M.}},
+\bauthor{\bsnm{Gardner}, \binits{M.}},
+\bauthor{\bsnm{Clark}, \binits{C.}},
+\bauthor{\bsnm{Lee}, \binits{K.}},
+\bauthor{\bsnm{Zettlemoyer}, \binits{L.}}:
+\bctitle{{Deep contextualized word representations}}.
+In: \bbtitle{NAACL HLT 2018 - 2018 Conference of the North American Chapter of
+  the Association for Computational Linguistics: Human Language Technologies -
+  Proceedings of the Conference},
+vol. \bseriesno{1},
+pp. \bfpage{2227}--\blpage{2237}
+(\byear{2018}).
+\doiurl{10.18653/v1/n18-1202} .
+\burl{https://arxiv.org/abs/1802.05365v2}
+\end{bchapter}
+\endbibitem
+
+%%% 29
+\bibitem[\protect\citeauthoryear{Pennington et~al.}{2014}]{Pennington2014}
+\begin{bchapter}
+\bauthor{\bsnm{Pennington}, \binits{J.}},
+\bauthor{\bsnm{Socher}, \binits{R.}},
+\bauthor{\bsnm{Manning}, \binits{C.D.}}:
+\bctitle{{GloVe: Global vectors for word representation}}.
+In: \bbtitle{EMNLP 2014 - 2014 Conference on Empirical Methods in Natural
+  Language Processing, Proceedings of the Conference},
+pp. \bfpage{1532}--\blpage{1543}
+(\byear{2014}).
+\doiurl{10.3115/v1/d14-1162} .
+\burl{https://nlp.stanford.edu/projects/glove/}
+\end{bchapter}
+\endbibitem
+
+%%% 30
+\bibitem[\protect\citeauthoryear{Fan et~al.}{2017}]{Fan2017b}
+\begin{bchapter}
+\bauthor{\bsnm{Fan}, \binits{Q.}},
+\bauthor{\bsnm{Yu}, \binits{Y.}},
+\bauthor{\bsnm{Yin}, \binits{G.}},
+\bauthor{\bsnm{Wang}, \binits{T.}},
+\bauthor{\bsnm{Wang}, \binits{H.}}:
+\bctitle{{Where Is the Road for Issue Reports Classification Based on Text
+  Mining?}}
+In: \bbtitle{International Symposium on Empirical Software Engineering and
+  Measurement},
+vol. \bseriesno{2017-Novem},
+pp. \bfpage{121}--\blpage{130}
+(\byear{2017}).
+\doiurl{10.1109/ESEM.2017.19}
+\end{bchapter}
+\endbibitem
+
+%%% 31
+\bibitem[\protect\citeauthoryear{Pandey et~al.}{2017}]{Pandey2017}
+\begin{barticle}
+\bauthor{\bsnm{Pandey}, \binits{N.}},
+\bauthor{\bsnm{Sanyal}, \binits{D.K.}},
+\bauthor{\bsnm{Hudait}, \binits{A.}},
+\bauthor{\bsnm{Sen}, \binits{A.}}:
+\batitle{{Automated classification of software issue reports using machine
+  learning techniques: an empirical study}}.
+\bjtitle{Innovations in Systems and Software Engineering}
+\bvolume{13}(\bissue{4}),
+\bfpage{279}--\blpage{297}
+(\byear{2017})
+\doiurl{10.1007/s11334-017-0294-1}
+\end{barticle}
+\endbibitem
+
+%%% 32
+\bibitem[\protect\citeauthoryear{Cho et~al.}{2022}]{Cho2022}
+\begin{barticle}
+\bauthor{\bsnm{Cho}, \binits{H.}},
+\bauthor{\bsnm{Lee}, \binits{S.}},
+\bauthor{\bsnm{Kang}, \binits{S.}}:
+\batitle{{Classifying issue reports according to feature descriptions in a user
+  manual based on a deep learning model}}.
+\bjtitle{Information and Software Technology}
+\bvolume{142},
+\bfpage{106743}
+(\byear{2022})
+\doiurl{10.1016/j.infsof.2021.106743}
+\end{barticle}
+\endbibitem
+
+%%% 33
+\bibitem[\protect\citeauthoryear{{National Legislative Assembly}}{2019}]{PDPA}
+\begin{botherref}
+\oauthor{\bsnm{{National Legislative Assembly}}}:
+{The Thailand Personal Data Protection Act}.
+Technical report
+(2019).
+\url{https://thainetizen.org/wp-content/uploads/2019/11/thailand-personal-data-protection-act-2019-en.pdf}
+\end{botherref}
+\endbibitem
+
+%%% 34
+\bibitem[\protect\citeauthoryear{ISO/IEC}{2011}]{ISO/IEC2011}
+\begin{botherref}
+\oauthor{\bsnm{ISO/IEC}}:
+{International Standard ISO/IEC 29100}.
+Technical report,
+ISO/IEC
+(2011)
+\end{botherref}
+\endbibitem
+
+%%% 35
+\bibitem[\protect\citeauthoryear{{Asia-Pacific Economic Cooperation
+  (APEC)}}{2017}]{Apec2015}
+\begin{botherref}
+\oauthor{\bsnm{{Asia-Pacific Economic Cooperation (APEC)}}}:
+{APEC Privacy Framework (2015)}.
+Technical report,
+APEC Secretariat
+(2017)
+\end{botherref}
+\endbibitem
+
+%%% 36
+\bibitem[\protect\citeauthoryear{Moraes et~al.}{2013}]{Moraes2013}
+\begin{barticle}
+\bauthor{\bsnm{Moraes}, \binits{R.}},
+\bauthor{\bsnm{Valiati}, \binits{J.F.}},
+\bauthor{\bsnm{{Gaviao Neto}}, \binits{W.P.}}:
+\batitle{{Document-level sentiment classification: An empirical comparison
+  between SVM and ANN}}.
+\bjtitle{Expert Systems with Applications}
+\bvolume{40}(\bissue{2}),
+\bfpage{621}--\blpage{633}
+(\byear{2013})
+\end{barticle}
+\endbibitem
+
+%%% 37
+\bibitem[\protect\citeauthoryear{Breiman}{2001}]{Breiman2001a}
+\begin{barticle}
+\bauthor{\bsnm{Breiman}, \binits{L.}}:
+\batitle{{Random forests}}.
+\bjtitle{Machine learning}
+\bvolume{45}(\bissue{1}),
+\bfpage{5}--\blpage{32}
+(\byear{2001})
+\end{barticle}
+\endbibitem
+
+%%% 38
+\bibitem[\protect\citeauthoryear{Kowsari et~al.}{2019}]{Kowsari2019}
+\begin{bchapter}
+\bauthor{\bsnm{Kowsari}, \binits{K.}},
+\bauthor{\bsnm{Meimandi}, \binits{K.J.}},
+\bauthor{\bsnm{Heidarysafa}, \binits{M.}},
+\bauthor{\bsnm{Mendu}, \binits{S.}},
+\bauthor{\bsnm{Barnes}, \binits{L.}},
+\bauthor{\bsnm{Brown}, \binits{D.}}:
+\bctitle{{Text classification algorithms: A survey}}.
+In: \bbtitle{Information},
+vol. \bseriesno{10},
+pp. \bfpage{1}--\blpage{68}
+(\byear{2019}).
+\burl{https://www.mdpi.com/2078-2489/10/4/150}
+\end{bchapter}
+\endbibitem
+
+%%% 39
+\bibitem[\protect\citeauthoryear{Harris}{1954}]{Harris1954}
+\begin{barticle}
+\bauthor{\bsnm{Harris}, \binits{Z.S.}}:
+\batitle{{Distributional Structure}}.
+\bjtitle{WORD}
+\bvolume{10}(\bissue{2-3}),
+\bfpage{146}--\blpage{162}
+(\byear{1954})
+\end{barticle}
+\endbibitem
+
+%%% 40
+\bibitem[\protect\citeauthoryear{Srivastava et~al.}{2014}]{Srivastava2014}
+\begin{barticle}
+\bauthor{\bsnm{Srivastava}, \binits{N.}},
+\bauthor{\bsnm{Hinton}, \binits{G.}},
+\bauthor{\bsnm{Krizhevsky}, \binits{A.}},
+\bauthor{\bsnm{Sutskever}, \binits{I.}},
+\bauthor{\bsnm{Salakhutdinov}, \binits{R.}}:
+\batitle{{Dropout: A simple way to prevent neural networks from overfitting}}.
+\bjtitle{Journal of Machine Learning Research}
+\bvolume{15},
+\bfpage{1929}--\blpage{1958}
+(\byear{2014})
+\end{barticle}
+\endbibitem
+
+%%% 41
+\bibitem[\protect\citeauthoryear{Huggingface}{2020}]{Huggingface2020a}
+\begin{botherref}
+\oauthor{\bsnm{Huggingface}}:
+{Transformers}
+(2020).
+\url{https://huggingface.co/transformers/}
+\end{botherref}
+\endbibitem
+
+%%% 42
+\bibitem[\protect\citeauthoryear{TensorFlow}{2020}]{TensorFlow2020}
+\begin{botherref}
+\oauthor{\bsnm{TensorFlow}}:
+{The Sequential Model}
+(2020).
+\url{https://www.tensorflow.org/guide/keras/sequential{\_}model}
+\end{botherref}
+\endbibitem
+
+%%% 43
+\bibitem[\protect\citeauthoryear{Huggingface}{2020}]{Huggingface2020}
+\begin{botherref}
+\oauthor{\bsnm{Huggingface}}:
+{Tokenizers}
+(2020).
+\url{https://github.com/huggingface/tokenizers}
+Accessed 2021-01-10
+\end{botherref}
+\endbibitem
+
+%%% 44
+\bibitem[\protect\citeauthoryear{Reina}{2020}]{Reina2020}
+\begin{botherref}
+\oauthor{\bsnm{Reina}, \binits{Y.}}:
+{Text preprocessing for BERT}
+(2020).
+\url{https://www.kaggle.com/c/google-quest-challenge/discussion/127881}
+\end{botherref}
+\endbibitem
+
+%%% 45
+\bibitem[\protect\citeauthoryear{Almhana et~al.}{2016}]{Almhana2016}
+\begin{bchapter}
+\bauthor{\bsnm{Almhana}, \binits{R.}},
+\bauthor{\bsnm{Mkaouer}, \binits{W.}},
+\bauthor{\bsnm{Kessentini}, \binits{M.}},
+\bauthor{\bsnm{Ouni}, \binits{A.}}:
+\bctitle{{Recommending relevant classes for bug reports using multi-objective
+  search}}.
+In: \bbtitle{Proceedings of the 31st IEEE/ACM International Conference on
+  Automated Software Engineering (ASE)},
+pp. \bfpage{286}--\blpage{295}
+(\byear{2016})
+\end{bchapter}
+\endbibitem
+
+%%% 46
+\bibitem[\protect\citeauthoryear{Ye et~al.}{2019}]{Ye2019}
+\begin{bchapter}
+\bauthor{\bsnm{Ye}, \binits{X.}},
+\bauthor{\bsnm{Fang}, \binits{F.}},
+\bauthor{\bsnm{Wu}, \binits{J.}},
+\bauthor{\bsnm{Bunescu}, \binits{R.}},
+\bauthor{\bsnm{Liu}, \binits{C.}}:
+\bctitle{{Bug Report Classification Using LSTM Architecture for More Accurate
+  Software Defect Locating}}.
+In: \bbtitle{Proceedings - 17th IEEE International Conference on Machine
+  Learning and Applications, ICMLA 2018},
+pp. \bfpage{1438}--\blpage{1445}
+(\byear{2019})
+\end{bchapter}
+\endbibitem
+
+%%% 47
+\bibitem[\protect\citeauthoryear{Wild}{1997}]{Wild1997}
+\begin{botherref}
+\oauthor{\bsnm{Wild}, \binits{C.}}:
+{The Wilcoxon Rank-Sum Test}.
+Technical report,
+Department of Statistics, University of Auckland
+(1997)
+\end{botherref}
+\endbibitem
+
+%%% 48
+\bibitem[\protect\citeauthoryear{McGraw and Wong}{1992}]{McGraw1992a}
+\begin{barticle}
+\bauthor{\bsnm{McGraw}, \binits{K.O.}},
+\bauthor{\bsnm{Wong}, \binits{S.P.}}:
+\batitle{{A Common Language Effect Size Statistic}}.
+\bjtitle{Psychological Bulletin}
+\bvolume{111}(\bissue{2}),
+\bfpage{361}--\blpage{365}
+(\byear{1992})
+\end{barticle}
+\endbibitem
+
+%%% 49
+\bibitem[\protect\citeauthoryear{Vargha and Delaney}{2000}]{Vargha2000}
+\begin{barticle}
+\bauthor{\bsnm{Vargha}, \binits{A.}},
+\bauthor{\bsnm{Delaney}, \binits{H.D.}}:
+\batitle{{A critique and improvement of the CL common language effect size
+  statistics of McGraw and Wong}}.
+\bjtitle{Journal of Educational and Behavioral Statistics}
+\bvolume{25}(\bissue{2}),
+\bfpage{101}--\blpage{132}
+(\byear{2000})
+\end{barticle}
+\endbibitem
+
+%%% 50
+\bibitem[\protect\citeauthoryear{Arcuri and Briand}{2014}]{Arcuri2014}
+\begin{barticle}
+\bauthor{\bsnm{Arcuri}, \binits{A.}},
+\bauthor{\bsnm{Briand}, \binits{L.}}:
+\batitle{{A Hitchhiker's guide to statistical tests for assessing randomized
+  algorithms in software engineering}}.
+\bjtitle{Software Testing Verification and Reliability}
+\bvolume{24}(\bissue{3}),
+\bfpage{219}--\blpage{250}
+(\byear{2014})
+\end{barticle}
+\endbibitem
+
+%%% 51
+\bibitem[\protect\citeauthoryear{Sarker}{2021}]{Sarker2021}
+\begin{botherref}
+\oauthor{\bsnm{Sarker}, \binits{I.H.}}:
+{Deep Learning: A Comprehensive Overview on Techniques, Taxonomy, Applications
+  and Research Directions}.
+Springer
+(2021)
+\end{botherref}
+\endbibitem
+
+\end{thebibliography}

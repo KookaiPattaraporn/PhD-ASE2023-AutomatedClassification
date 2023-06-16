@@ -1,0 +1,101 @@
+\section{Classifying Privacy Requirements in Issue Reports} \label{sec:approach}
+
+\subsection{Motivating example}
+
+The following example demonstrates how the issue reports were manually classified into relevant privacy requirements in \cite{Sangaroonsilp2023}. Issue 123403\footnote{https://bugs.chromium.org/p/chromium/issues/detail?id=123403} in Google Chrome reported that users cannot delete individual cookies (see Figure \ref{fig:issue-example}). \newtext{The coders read through the issue summary and description and followed the following three steps to classify issue reports to privacy requirements. First, the coders identified concerned personal data (e.g. name, email address and bank account details) described in the issue report. Then, they identified functions/properties related to the concerned personal data reported in the issue. Finally, they mapped the issue report to one or more relevant privacy requirements. Based on this issue, the coders identified \emph{cookies} as the concerned personal data as it may contain login details, search history and identifiable information. The coders identified \emph{delete} as the function related to the cookies. Finally, this issue report was classified into requirement R44 \textit{\textbf{ALLOW} the data subjects to erase their personal data} under Category 1 (User participation) in the taxonomy (see Appendix A). This scenario reflects that the browser should allow the users to select the cookies that they want to delete \cite{Sangaroonsilp2023}. This manual classification process can be automated using ML and NLP techniques as well as deep learning models, which is studied in this work.}
+
+\subsection{Approaches} \label{subsec:approaches}
+
+\newtext{Our study explores the feature extraction techniques that can be used to automatically classify privacy requirements in issue reports.} We use the textual description (i.e. summary and description) of issue reports as an input to a model to classify relevant privacy requirements (see Figure \ref{fig:framework}). We treat our classification model as \emph{multi-label multi-class classification problem} since an issue can be classified into multiple privacy requirements. We acquire the privacy-related issues from \cite{Sangaroonsilp2023} (see Section \ref{subsec:dataset} for more details). We first extract the summary and description of issues with the label(s) of relevant privacy requirements from the dataset. We then apply different textual feature extraction and learning techniques to form a vector representation of texts. Those vectors and privacy requirement labels are then fed to a classifier for training and validation.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{"Figures/framework_new"}
+	\caption{An overview framework for developing a classification model.}
+	\label{fig:framework}
+\end{figure}
+
+The classification process involves three essential steps: textual data pre-processing, textual feature extraction, and training a classification model. The first important step is to eliminate noise from texts. In our study, we remove stop words from the input texts and also apply lemmatisation. Stop words are the words that occur commonly in the texts but contain less meaning (e.g. a/an/the) while the lemmatisation reduces the variation of words by converting words into their root form (e.g. played to play). It is noted that the stop words removal and lemmatisation are not applied in BERT. The preprocessed texts are then encoded into vectors using a textual feature extraction technique. We describe each technique in Section \ref{subsec:BoW} - \ref{subsec:CNN} below. It is important to note that our models take as input the summary/title and description of an issue. This is the minimal information which must be provided at the time when an issue is created for any issue tracking system. Thus, the automated support provided by these classification models is readily available from the issue creation time. In addition, this enables our study to be applicable to a wide range of issue tracking systems.
+
+The issue feature vectors derived from each method are then fed into a classifier. \newtext{We first employed two well-known classifiers \emph{RF and SVM}, that performed best in several document classification problems \cite{Moraes2013,Breiman2001a}. However, we found that RF performed better than SVM for all the traditional word embedding techniques we adopted in our context. Thus, we decided to use only the RF classifier for all the traditional word embedding techniques in this study.} RF is a randomised ensemble method where a classification is made by voting from weak learners (i.e. decision trees) \cite{blei2003latent}. We can thus derive the probability distribution among class labels as recommended requirements. We note that BERT has different details in the implementation steps. Hence, we specifically describe our BERT implementation in Section \ref{subsec:BERT}.
+
+\subsubsection{Bag of Words} \label{subsec:BoW}
+
+Bag of Words (BoW)  is the simplest model that represents texts as a vector of word frequency \cite{Tirilly2008}. It basically creates a list of vocabulary for the entire corpus, then constructs a vector representation of a vocabulary size for each document. Elements in the vector contain the frequency of each word. BoW is implemented in our study as follows. After the issues are pre-processed, we first tokenise every issue in our dataset to convert from sentences into a collection of words (i.e. terms). We then build our dictionary (i.e. vocabulary) from a list of \emph{unique} words. Next, we generate a vector of each issue by counting the occurrences of each word appearing in that issue based on the words that we have in our vocabulary set. Finally, we acquire a vector representation of a vocabulary size for each issue, whose elements contain occurrences of the words. The vectors are then fed to train the model.
+
+However, BoW has two major weaknesses. Firstly, it does not capture the semantics of words. For example, it treats ``Chrome", ``browser" and ``school" equally, while semantically ``Chrome" and ``browser" are more related than ``browser" and ``school" or ``Chrome" and ``school". Secondly, the order of the words in texts is ignored. For instance, BoW represents the same vector representation for these two different sentences ``Chrome is good" and ``Is Chrome good".
+
+\subsubsection{N-gram IDF}\label{subsec:N-gram}
+
+N-gram IDF is an extension of IDF weighting scheme. It is developed to measure weights of phrases (i.e. terms of any length, where length is greater than 1) appeared in a collection of documents \cite{Shirakawa2015}. It gives more weights to the phrases (N-gram terms) that occur in fewer documents. We note that the N-gram library\footnote{https://github.com/iwnsew/ngweight} is adopted in our implementation. N-gram helps us to distinguish the frequency of different phrases that contain the same set of words. For example, from ``Chrome is good" and ``Is Chrome good", we can detect their difference when we use 3-gram setting. When it combines with IDF, it can also identify significant phrases occurred in our issue reports.
+
+In our implementation, we first construct a vocabulary set of N-gram terms. We specify the number of grams (i.e. words in a term) that we would like to extract to our dictionary. For example, an issue summary states ``Modify cookies settings''. If we create a dictionary using 1-gram, we get a list of ``Modify'', ``cookies'' and ``settings'' (3 terms). If we use 2-gram, we get a list of 2-word terms as ``Modify cookies'' and ``cookies settings'' (2 terms). Therefore, when we set a range of 1-word to 2-word terms, our vocabulary set contains 1-word and 2-word terms as ``Modify'', ``cookies'', ``settings'', ``Modify cookies'' and ``cookies settings'' (5 terms). We set the length of words from 1 to 10 in our experimental setting. This generates a set of 1-word to 10-word terms we have in our issue reports to include in the dictionary. We then find the occurrences of all the terms in each issue report. The weights of the N-gram terms are computed using the combination of IDF and Multiword Expression Distance (MED) in the space of information distance \cite{Shirakawa2015}. Finally, we create vectors to store the results obtained.
+
+N-gram IDF suffers from computational time when processing large corpus. It also fails to process natural language texts that do not have spaces between words (e.g. Chinese and Japanese)
+%We use n from 1 to 10.
+%N-gram IDF weighs phrases by combining the calculation IDF and Multiword Expression Distance (MED)
+%IDF is originally used to measure how common or rare a term with one word is.
+%An IDF is calculated as:
+%\begin{equation*}
+%	idf_{t} = \log_{10} \left(\frac{\abs{D}}{df_t}\right)
+%\end{equation*}
+%where $D$ is a number of documents and $df_t$ is a number of documents in a collection that contains term $t$. We note that the documents refer to our issue reports.
+
+\subsubsection{TF-IDF} \label{subsec:TF-IDF}
+
+TF-IDF is a type of frequency-based embedding where a vector representation of texts is computed from the term weighting measurement across documents in the corpus \cite{blei2003latent}. This technique evaluates whether a term is important to a document or in a collection of documents. The TF-IDF weight term-document is calculated from the product of two values - term frequency (tf) and inverse document frequency (idf) as shown below:
+
+\begin{equation*}
+	w_{t,d} = tf_{t,d} \times \log_{10} \left(\frac{N}{df_t}\right)
+\end{equation*}
+\\
+where $w_{t,d}$ is a tf-idf weighted term-document of term $t$ in document $d$, $tf_{t,d}$ is a term frequency of term $t$ in document $d$, $N$ is a number of documents in a collection, and $df_t$ is a number of documents in a collection that contains term $t$.
+
+Comparing to our implementation, documents are issue reports and terms (t) are a list of words that we have in our dictionary. To construct a TF-IDF vector for an issue, we first create a dictionary from all the terms in our issue reports. We set the range to extract the terms from 1-word to 10-word terms in our setting. Next, we define $N$ as the number of issue reports we have in each project. In each project, we count the number of times that term $t$ appears in an issue, then divide by the total number of terms in the issue, and keep it as a term frequency. We then count the number of issue reports that contain the individual term in our dictionary, and keep it as document frequency of each term. Finally, we calculate the TF-IDF values of terms and store them in the elements in a vector representation of each issue report.
+%use TfidfVectorizer in sklearn, where our gram is from 1 to 10.
+
+TF-IDF overcomes the major weaknesses of BoW. The common terms that frequently appear in issue reports but do not show their significance in other issue reports in the dataset are identified by their weights in vectors. TF-IDF also captures basic linguistic notions of terms (e.g. synonymy) \cite{blei2003latent}. However, semantic similarities between words and sequence of words in texts are not promised \cite{Kowsari2019}.
+
+
+\subsubsection{Word2Vec} \label{subsec:W2V}
+
+Word2Vec is a two-layer neural networks that learns word features (e.g. the transitional probabilities between words). It then represents words as a group of numerical vectors in a vector space (i.e. word embedding) \cite{Mikolov2013}. The dot product of two word vectors in the vector space reflects the similarity between these two words. Word2Vec is developed to tackle the following problems:
+
+\begin{itemize}
+	\item Coverage: Co-occurrence words may not occur consecutively to each other. There are two model architectures proposed to solve this problem: Continuous Bag-of-Words (CBoW) \cite{Harris1954} and Skip-gram \cite{Mikolov2013}.
+	\item Space: The aforementioned techniques create vectors of vocabulary size. However, most of the elements inside each vector store zero. This could lead to sparse distribution.
+	\item Speed: The computation is expensive when the vector space is large.
+\end{itemize}
+
+In our implementation, we employ Google's pretrained Word2Vec model\footnote{\url{https://code.google.com/archive/p/word2vec/}} in our study. We first tokenise all the issue reports in the dataset and store it in a vocabulary set. Next, we generate one-hot encoding vectors for all the issue reports as inputs. Next, we feed the inputs into a Word2Vec architecture. The two layers of Word2Vec consist of hidden layer and output layer. The hidden layer is an encoder receiving input vectors while the output layer is a decoder storing word probabilities. In the training process, the input layer is the word embedding of each issue report while the output layer is privacy requirement labels of that issue report. The model performs the training by adjusting the weight and bias vector in the hidden layer from the given input and output vectors. We then use the hidden layer to perform privacy requirements classification on our test set. In the testing process, we feed the word embedding of each issue report in the test set to the model that we have trained (i.e. hidden layer in the training process) to get the classification results. %Finally, we evaluate classification performance of the model.
+ We have modified our CNN implementation to support a multi-label multi-class classification. We have changed an activation function from softmax to sigmoid, and had a dedicated output unit for each requirement (i.e. category)
+
+\subsubsection{Convolution Neural Network} \label{subsec:CNN}
+
+Convolution Neural Network (CNN) is a deep learning architecture proposed in \cite{LeeMin-JaeHeoChan-GunLee2017}. It consists of input layer, hidden layer (or convolutional layer) and output layer. \newtext{We implement this method to support a multi-label multi-class classification task by using a sigmoid activation function and having a dedicated output unit for each requirement (i.e. category).} We adopt Keras\footnote{https://keras.io/} and Google's pretrained Word2Vec model\footnote{\url{https://code.google.com/archive/p/word2vec/}}. The pre-trained model is used to create a word embedding for each input vector. We use dropout (dropout rate is 0.5) to avoid overfitting \cite{Srivastava2014}. Binary cross entropy, provided by Keras, is used as the network's loss function. For the setting of optimiser, we employ Adam with the learning rate adjustment techniques \textit{(ReduceLROnPlateau)} to train the model. We connect the output layer which is privacy requirement labels to the model. We train the model after fitting all the settings.
+
+\subsubsection{BERT} \label{subsec:BERT}
+
+In addition to the feature extraction techniques mentioned above, we also explore Bidirectional Encoder Representations from Transformers (BERT) as one of the candidates for performance comparison in classifying privacy requirements in issue reports. BERT is one of the latest breakthroughs in machine learning and NLP architecture. We use Huggingface Transformers library \cite{Huggingface2020a} and Tensorflow Keras API \cite{TensorFlow2020} in our implementation.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.7\linewidth]{"Figures/BERT_process"}
+	\caption{An overview of privacy requirements classification process using BERT.}
+	\label{fig:BERT_process}
+\end{figure}
+
+We have followed the process steps shown in Figure \ref{fig:BERT_process} for developing a recommendation model using BERT \newtext{\cite{Devlin2018}}. We concatenate issue summary and description of issue reports and use them as input texts. We then perform text pre-processing. In this step, we only remove non-alphanumeric characters from the input texts. We do not perform stop words removal and lemmatisation with BERT implementation since these processes will affect the context of original texts (e.g. negations and parts of speech). BERT tokeniser handles text preprocessing by itself \cite{Huggingface2020, Reina2020}. The dataset is then split into training and test set (see Section \ref{subsec:experimental-setting}).
+
+We employ BERT$_{BASE}$ model which has 12 transformer blocks (i.e. encoders), 768 hidden layers and 12 attention heads. We load the BERT tokeniser and configure parameters\footnote{These parameters are shown in the source code included in the replication package \cite{msrreplipkg}.} in the model (e.g. maximum length of tokens, regularisation, optimiser and classification metrics, batch size and learning epochs). We have calculated the average number of words in our input texts (113 words for Google Chrome and 90 words for Moodle). Hence, we set the maximum length of tokens at 120 for both projects as this number is sufficient for our input. We denote that $N$ represents the maximum length of token in Figure \ref{fig:BERT_architecture}, thus $N$ for our model is 120. After specifying all parameters, we perform the tokenisation process to transform input texts into tokens (represented as $Tok i$ in Figure \ref{fig:BERT_architecture}, where $i$ is an order of token). In this step, the tokeniser also automatically adds a special token (i.e. the \emph{[CLS]} token) into our original input text (see Figure \ref{fig:BERT_architecture}). The \emph{[CLS]} token is a starting point of each input text \cite{Devlin2018}. Finally, a complete sequence of input tokens is generated.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1.0\linewidth]{"Figures/BERT_architecture"}
+	\caption{An architecture of our BERT model (adapted from \cite{Devlin2018}).}
+	\label{fig:BERT_architecture}
+\end{figure}
+
+The next step is to set up our model input layer, main BERT layer and model outputs layer. From the previous step, each issue report is transformed into a sequence of input tokens. Thus, our model input layer is the sequences of input tokens. We load the BERT model with all configurations as a main BERT layer. Finally, we create an individual output for each privacy requirement (i.e. R1, R2, ... , R71). Since we perform multi-label multi-class classification, the model predicts a class label for individual privacy requirement of each issue report. We therefore have 71 model outputs.
+
+Once the sequence of tokens is fed into the model, the model creates an input embedding $(E_{i})$ for each token as shown in Figure \ref{fig:BERT_architecture}. The token embeddings are then forwarded to hidden states in each transformer block which functions as an encoder. BERT$_{BASE}$ model consists of 12 transformer blocks, however Figure \ref{fig:BERT_architecture} shows only the first and last layers for illustration purpose. Next, the model is trained with the training set based on the setting above and evaluated on the validation set in the training process. We later evaluate the performance of our model on the test set. 

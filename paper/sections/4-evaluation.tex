@@ -1,0 +1,507 @@
+\section{Evaluation} \label{sec:evaluation}
+
+We first describe the dataset used in this study and performance measures used for model evaluation. We then present and discuss the results obtained from privacy requirements classification in Google Chrome and Moodle projects. 
+
+\subsection{Dataset} \label{subsec:dataset}
+
+We use issue reports from two large and widely used software projects (i.e. Google Chrome and Moodle). This dataset\footnote{The dataset was publicly published at \url{https://bit.ly/Mining-privacy-reqs-rev22}} was originally collected and annotated by Sangaroonsilp et al. \cite{Sangaroonsilp2023}. The authors first collected 1,604 issue reports in total from both projects. After the manual examination, 230 issues were filtered out due to limited information for classification task. Finally, the dataset contains 1,374 issues (896 issues from Google Chrome and 478 issues from Moodle). These issues were explicitly assigned \textit{``privacy"} component in their issue tracking systems. In the dataset, each issue report contains issue ID, issue summary, issue description and its privacy requirement labels (see Figure \ref{fig:issue-with-label}). 
+
+\begin{figure}[ht]
+	\centering
+	\begin{subfigure}[b]{0.8\textwidth}
+		\includegraphics[width=\textwidth]{"Figures/issue_with_reqlabel"}
+		\caption{An issue report with labels in requirement level.}
+		\label{fig:issue-with-reqlabel}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.8\textwidth}
+		\includegraphics[width=\textwidth]{"Figures/issue_with_catlabel"}
+		\caption{An issue report with labels in category level.}
+		\label{fig:issue-with-catlabel}
+	\end{subfigure}
+	\caption{An example of Google Chrome issue report with label in requirement and category levels. Irrelevant category/requirement to a particular issue report is represented by 0, whereas the relevant one is represented by 1. *Issue description is not shown in full details due to space limitation.}
+	\label{fig:issue-with-label}
+\end{figure}
+
+As described in \cite{Sangaroonsilp2023}, an issue report was labelled with relevant privacy requirement(s). We use the term ``labelled with" to denote the relationship between an issue report and its relevant privacy requirement(s). It is noted that some privacy requirements are belong to more than one category in the taxonomy. Each issue report can be represented in two levels: category and requirement levels. For example, issue 123403\footnote{https://bugs.chromium.org/p/chromium/issues/detail?id=123403} in Google Chrome is classified into requirement R44 (see Figure \ref{fig:issue-with-reqlabel}). Based on the taxonomy in \cite{Sangaroonsilp2023}, requirement R44 is categorised into category 1 (User participation) (see Figure \ref{fig:issue-with-catlabel}).
+
+We also show the distribution of issue reports based on number of requirements they were classified to. The majority of the issues relates to one requirement for both projects (see Figure \ref{fig:req-per-issue}). Figure \ref{fig:occ} shows the occurrences of all the privacy requirements in both projects. Out of 71 privacy requirements, the issue reports were classified into 39 and 40 requirements in Google Chrome and Moodle respectively. We have noted that our problem falls into a long tail distribution where the frequency of top requirements is heavy, which is challenging for the classification task. 
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.9\linewidth]{"Figures/req_per_issue"}
+	\caption{The distribution of number of privacy requirements identified in Google Chrome and Moodle issue reports.}
+	\label{fig:req-per-issue}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\begin{subfigure}[b]{0.9\textwidth}
+		\includegraphics[width=\textwidth]{"Figures/occ_chrome"}
+		%\caption{An issue report with labels in requirement level.}
+		%\label{fig:issue-with-reqlabel}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.9\textwidth}
+		\includegraphics[width=\textwidth]{"Figures/occ_moodle"}
+		%\caption{An issue report with labels in category level.}
+		%\label{fig:issue-with-catlabel}
+	\end{subfigure}
+	\caption{Privacy requirements occurrences in Google Chrome and Moodle issue reports.}
+	\label{fig:occ}
+\end{figure}
+
+\subsection{Experimental setting} \label{subsec:experimental-setting}
+
+We perform the experiments for each project separately. The issue reports are sorted by creation date based on their issue ID. The issues are then split into two mutually exclusive sets where those issues in training set are created before the issues in the test set to ensure that the models learn from historical data (60\% of issues in the training set, 20\% of issues in the validation set and 20\% of issues in the test set).
+
+\subsection{Performance measures}
+
+We use two widely used measures (i.e. mean reciprocal rank (MRR) and recall at k (Recall@k)) to evaluate the performance of our models. We also employ a non-parametric hypothesis test (i.e. Wilcoxon rank-sum test) and effect size to compare classification benchmarks between a pair of models applied in our study (see Table \ref{tab:wilcoxon-chrome} and Table \ref{tab:wilcoxon-moodle}). \\
+
+\begin{itemize}[leftmargin=3mm]
+	\item MRR \cite{Almhana2016, Ye2019} reflects the reciprocal of the rank at which the first relevant answer is recommended. It is calculated as:
+	\begin{equation}
+		MRR = \frac{1}{q}\sum_{i = 1}^{q}\frac{1}{rank_{i}}
+	\end{equation}
+	where $q$ is the number of issue reports, $ rank_{i} $ is the rank position of first relevant items. 
+	
+	For example, assume that we have two issue reports (i.e. A and B). Issue report A is labelled with requirement R5. The classifier returns requirements {R1, R5 ,R12} for issue report A. Issue report B is labelled with requirements {R7 and R3}. The classifier returns requirement R7 for issue report B. The rank of issue report A is 2 as requirement R5 is in the second order from the list returned by the classifier, and the reciprocal rank is $\frac{1}{2}$. The rank of issue report B is 1 as requirement R7 is in the first rank of the returned result, and the reciprocal rank is 1. Hence, the MRR is:
+	
+	\begin{align}
+		\begin{split}
+			MRR = \frac{1}{2} \left ( \frac{1}{2} + 1\right )
+			&= \frac{3}{4}
+		\end{split}
+	\end{align}
+	
+	\item Recall@k \\
+	Recall@k returns the number of correctly retrieved results over all the collected results from the top $k$ elements recommended by our recommendation models. It is calculated as:
+	
+	\begin{equation}
+		Recall@k = \frac{1}{k}\sum_{i=1}^{k}\frac{\lvert{Rec_{i}\rvert \cap Label_{i}}}{\lvert{Label_{i}\rvert}}
+	\end{equation}
+	
+	where $k$ is a number of issue reports in the test set, $Rec_{i}$ is a set of privacy requirements recommended for issue report $i$, and $Label_{i}$ is a set of privacy requirement(s) actually labelled in issue $i$. 
+	
+	Assuming that we have two issue reports (i.e. A and B), and three privacy requirements (i.e. R1, R2 and R3). Issue report A is actually labelled with requirements {R1, R2, R3}, while issue report B is actually labelled requirement {R1}. The classifier recommends requirements {R1, R2} for issue report A, and requirements {R1, R3} for issue report B. Assuming that we perform Recall@k, where $k = 2$, is:
+
+	\begin{equation}
+		\begin{split}
+			Recall@2 & = \frac{1}{2} \left ( \frac{ \lvert \left \{ R1, R2 \right \} \cap \left \{ R1, R2, R3 \right \} \rvert}{\lvert \left \{ R1, R2, R3 \right \} \rvert} + \frac{ \lvert \left \{ R1, R3 \right \} \cap \left \{ R1 \right \} \rvert}{\lvert \left \{ R1 \right \} \rvert} \right ) \\
+			& = \frac{1}{2}\left ( \frac{2}{3} + \frac{1}{1} \right ) = \frac{5}{6}
+		\end{split}
+	\end{equation}
+	
+	\item Wilcoxon test \\
+	Wilcoxon rank-sum test (also known as Mann-Whitney U test) is a non-parametric hypothesis test which compares the statistical difference between two independent observations \cite{Wild1997}. We employ the Wilcoxon test to compare the significance of the performance of two classification models based on their recall@k, where k = 1 to k = 20. 
+	
+	In addition, we also compute the common language effect size (CL) to reflect the proportion of paired observations where the first observation $(x)$ is higher than the second observation $(y)$ \cite{McGraw1992a}. Later, Vargha and Delaney \cite{Vargha2000} proposed the generalisation of CL and called it as the \emph{measure of stochastic superiority}. The measure of stochastic superiority $(\hat{A}_{XY}$ measure) is a generalisation of CL. This version does not require normally distributed data and it works with ordinal data. This measure was also recommended and employed in previous work to assess effect size when performing non-parametric hypothesis test \cite{Arcuri2014, Choetkiertikul2018}. Therefore, it is suitable for our observations. $(\hat{A}_{XY}$ is calculated as:
+	
+	\begin{equation}
+		\hat{A}_{XY} = \frac{\left [ \# \left ( X > Y \right ) + \left ( 0.5 \times \#\left ( X = Y \right ) \right ) \right ]}{n}
+	\end{equation}
+	
+	where $\#(X > Y)$ is the number of observations that the recall@k of $X$ is greater than the recall@k of $Y$, $\#(X = Y)$ is the number of observations that the recall@k of $X$ equals $Y$, and $n$ is the total number of observations (i.e. $n$ = 20).
+	
+\end{itemize}
+
+\begin{table}[ht]
+	\centering
+	\caption{Evaluation results of classifying privacy requirements in Google Chrome and Moodle issue reports.}
+	\label{tab:results}
+	\begin{tabular}{@{}llllcccc@{}}
+		\toprule
+		\multirow{2}{*}{Project} & \multirow{2}{*}{Text Feature} & \multirow{2}{*}{Classifier} & \multirow{2}{*}{MRR} & \multicolumn{4}{c}{Recall@k} \\ \cline{5-8}
+		&  &  & & k=5  & k=10  & k=15 & k=20  \\
+		
+		\midrule
+		
+		Google Chrome & Baseline & Random & 0.1693 & 0.1440 & 0.1694 & 0.3079 & 0.3588 \\ 
+		&  & Freq. & 0.4458 & 0.7477 & 0.9213 & 0.9523 & 0.9921 \\ 
+		& BoW & RF & 0.6049 & 0.7597 & 0.8977 & 0.9454 & 0.9509 \\ 
+		& N-gram IDF & RF & \underline{\textbf{0.6093}} & 0.7866 & 0.9032 & 0.9245 & 0.9440 \\ 
+		& TF-IDF & RF & \underline{\textbf{0.6093}} & 0.7866 & 0.9032 & 0.9245 & 0.9440 \\ 
+		& Word2Vec & RF & 0.5971 & 0.7755 & 0.8880 & 0.9338 & 0.9421 \\ 
+		& CNN & & \newtext{0.4561} & \newtext{0.7477} & \newtext{0.9213} & \newtext{0.9523} & \newtext{0.9690} \\
+		& BERT &  & 0.5169 & 0.7097 & 0.9213 & 0.9644 & 0.9764 \\ 
+		
+		\midrule
+		
+		Moodle & Baseline & Random & 0.2601 & 0.2624 & 0.3229 & 0.3486 & 0.4328 \\ 
+		&  & Freq. & 0.4111 & 0.4751 & 0.7222 & 0.8375 & 0.8615 \\ 
+		& BoW & RF & 0.5573 & 0.6027 & 0.7764 & 0.8186 & 0.8876 \\ 
+		& N-gram IDF & RF & \underline{\textbf{0.5838}} & 0.5979 & 0.7392 & 0.8158 & 0.8674 \\ 
+		& TF-IDF & RF & 0.5573 & 0.6027 & 0.7764 & 0.8186 & 0.8876 \\ 
+		& Word2Vec & RF & 0.5431 & 0.5890 & 0.7632 & 0.8620 & 0.8765 \\ 
+		& CNN &  & \newtext{0.4126} & \newtext{0.4287} & \newtext{0.7222} & \newtext{0.8328} & \newtext{0.8696} \\
+		& BERT &  & 0.3898 & 0.4704 & 0.5934 & 0.8277 & 0.8538 \\
+		
+		\bottomrule      
+	\end{tabular}
+\end{table}
+
+\subsection{Results}
+
+The methods we used in this work can be classified into 3 groups: naive baselines (i.e. random guessing and frequency-based method), traditional word embedding techniques (i.e. BoW, N-gram IDF, TF-IDF and Word2Vec) and deep learning techniques (i.e. CNN and BERT). We report here the results in answering the following research questions: \\
+
+\begin{itemize}
+	\item \textbf{RQ1: \textit{Do the traditional word embedding techniques outperform naive baselines?}} 
+	
+	\newtext{This research question aims to examine how the selected traditional word embedding techniques perform compared to the naive baselines. We performed a sanity check by comparing the classification performance between the traditional word embedding techniques and two common naive baseline benchmarks, which are random guessing and frequency-based method. The random guessing performs random selection over a set of issues in the training set to give a recommendation based on the privacy requirements of the selected issue. The frequency-based method recommends privacy requirements based on the frequency of assigned privacy requirements in the training set. We note that the data used in this study is heavily imbalanced and has long tail distribution (see Figure \ref{fig:occ}). Thus, the frequency-based method becomes a strong baseline that the models should be compared with as a sanity check whether the techniques are suitable for classifying the privacy requirements. The goal of this RQ is to confirm that the selected traditional word embedding techniques outperform the naive baseline benchmarks and can be used to automatically classify privacy requirements in issue reports.}
+	
+	\newtext{Table \ref{tab:results} shows the MRR and recall@k results of all the state-of-the-art techniques and naive baseline benchmarks in Google Chrome and Moodle datasets. All the traditional word embedding techniques outperform both random guessing and frequency-based methods on MRR in both Google Chrome and Moodle projects. All the techniques except random guessing achieve over 0.7 recall@5 in Google Chrome project. In other words, more than 70\% of the issue reports were classified into the correct privacy requirements when five requirements have been suggested. We note that as $k$ equals to the number of privacy requirements that we have (i.e. 71), the recall will become 1 (i.e. issue reports are classified into every requirement). On recall@k, the traditional techniques also perform better than the random guessing baseline in both projects.}
+		
+	\newtext{In Google Chrome project, these techniques underperform the frequency-based baseline on average recall@k, where k = 1 to k = 20. N-gram IDF and TF-IDF are the best performers with 0.6093 on MRR in Google Chrome project. TF-IDF also achieves the highest recall@5. In Moodle project, the traditional techniques perform much better on MRR and recall@k. N-gram IDF achieves the highest MRR at 0.5838 while BoW and TF-IDF achieve the highest recall@5 at 0.6027. All the traditional techniques perform much better than the random guessing and frequency-based methods. The differences on MRR and recall@k results between those four traditional techniques are very small (less than 0.05). In summary, N-gram IDF is the best performer in both projects.} \\
+	
+	\item \textbf{RQ2: \textit{Do deep learning techniques outperform the naive baselines and traditional word embedding techniques?}}
+	
+	\newtext{Since deep learning techniques have attracted a lot of attention from the research community and been using in various classification tasks \cite{Sarker2021}, we aim to investigate if the selected deep learning techniques can beat the traditional word embedding techniques and naive baselines in issue report classification. We evaluated the classification performance of the selected deep learning techniques and compared them with those four traditional word embedding techniques and two naive baseline benchmarks. We found that CNN and BERT outperform the random guessing and frequency-based methods on MRR in both projects, except for BERT in Moodle project. Although they achieve higher recall@k, where k = 1 to k = 20, than the random guessing method, they cannot beat the frequency-based method in both projects.}
+	
+	The deep learning techniques achieve lower MRR comparing to the traditional word embedding methods in both projects. CNN and BERT underperform those traditional methods on recall@k in Moodle project, but they outperform the traditional methods on recall@k in Google Chrome project. These two techniques may not be suitable for classifying issue reports into privacy requirements in this setting as the number of input data may not be sufficient for deep learning models. \\
+	
+	\item \textbf{RQ3: \textit{Are the results statistically significant difference?}} 
+	
+	\newtext{This RQ aims to investigate if the results of all classification methods are statistically significant difference. We can see that the results between naive baseline benchmarks, traditional word embedding techniques and deep learning techniques produced in the previous research questions are different, however we do not know how statistically significant difference those results are and how large of issue reports are concerned. Thus, we employed the Wilcoxon rank-sum test to answer this RQ.}
+	
+	Table \ref{tab:wilcoxon-chrome} and Table \ref{tab:wilcoxon-moodle} show the results of the Wilcoxon test and their effect sizes evaluated on recall@k \newtext{, where k = 1 to k = 20,} in Google Chrome and Moodle respectively. \newtext{In Google Chrome project, the Wilcoxon results confirm that there is a significant difference between the recall@k results of random guessing and all the other techniques. Those recall@k results are statistically significant difference with effect sizes greater than 0.95 for all the techniques in Google Chrome. The recall@k results of BERT are also statistically significant difference with effect sizes equal to 0.98 for all four traditional word embedding techniques. The recall@k results among the traditional techniques are not statistically significant difference. In Moodle project, the recall@k results of all the techniques are not statistically significant difference, except the random guessing with BoW, N-gram IDF and TF-IDF and N-gram IDF with BERT. The effect sizes of those statistically different methods are greater than 0.95.} \\
+
+\end{itemize}
+
+\newtext{Based on our investigation in this study, we discuss here a few factors that should be considered and also provide some suggestions for researchers when classifying privacy requirements in issue reports. The first factor that we need to consider is a dataset. We have seen from our results that all the selected traditional word embedding techniques performed better than the selected deep learning-based techniques with the datasets we used. The deep learning-based methods, especially BERT, may suffer from small datasets. Another factor is the selection of feature extractors and classifiers. We suggest the researchers to perform a preliminary experiment to briefly assess the performance of privacy requirements classification in issue reports. The classification performance varies depending on the amount, quality and distribution of the data and experimental settings. In our setting, N-gram IDF with RF performs well in Google Chrome and Moodle datasets in this setting. The researchers can adopt this approach to see if it works well with their datasets.}
+
+\begin{figure}[ht]
+	\centering
+	\begin{subfigure}[b]{0.9\textwidth}
+		\includegraphics[width=\textwidth]{"Figures/recall_chrome"}
+		%\caption{An issue report with labels in requirement level.}
+		%\label{fig:issue-with-reqlabel}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.9\textwidth}
+		\includegraphics[width=\textwidth]{"Figures/recall_moodle"}
+		%\caption{An issue report with labels in category level.}
+		%\label{fig:issue-with-catlabel}
+	\end{subfigure}
+	\caption{The performance of textual feature extraction techniques employed in this study (evaluated on Recall@k).}
+	\label{fig:recall}
+\end{figure}
+
+%\begin{figure}[ht]
+%	\centering
+%	\includegraphics[width=.8\linewidth]{"Figures/recall"}
+%	\caption{The performance of textual feature extraction techniques employed in this study (evaluated on Recall@k).}
+%	\label{fig:recall}
+%\end{figure}
+
+\begin{landscape}
+\begin{table}[]
+	\centering
+	\caption{\newtext{Comparison on classification benchmarks using Wilcoxon test and $\hat{A}_{XY}$ effect size (on the right column with 2 decimal points) on Google Chrome project.}}
+	\label{tab:wilcoxon-chrome}
+	\begin{tabular}{@{}ccccccccccccccccc@{}}
+		\toprule
+		\textbf{vs} &
+		\multicolumn{2}{c}{\textbf{Random}} &
+		\multicolumn{2}{c}{\textbf{Freq.}} &
+		\multicolumn{2}{c}{\textbf{BoW}} &
+		\multicolumn{2}{c}{\textbf{N-gram IDF}} &
+		\multicolumn{2}{c}{\textbf{TF-IDF}} &
+		\multicolumn{2}{c}{\textbf{Word2Vec}} &
+		\multicolumn{2}{c}{\textbf{CNN}} &
+		\multicolumn{2}{c}{\textbf{BERT}} \\ \midrule
+		\textbf{Random} &
+		&
+		&
+		\textless{}0.001 &
+		0.03 &
+		\textless{}0.001 &
+		0.00 &
+		\textless{}0.001 &
+		0.00 &
+		\textless{}0.001 &
+		0.00 &
+		\textless{}0.001 &
+		0.00 &
+		\textless{}0.001 &
+		0.03 &
+		\textless{}0.001 &
+		0.05 \\
+		\textbf{Freq.} &
+		\textless{}0.001 &
+		0.97 &
+		&
+		&
+		0.465 &
+		0.57 &
+		0.298 &
+		0.60 &
+		0.298 &
+		0.60 &
+		0.440 &
+		0.57 &
+		0.914 &
+		0.51 &
+		0.000 &
+		0.94 \\
+		\textbf{BoW} &
+		\textless{}0.001 &
+		1.00 &
+		0.465 &
+		0.43 &
+		&
+		&
+		0.626 &
+		0.55 &
+		0.626 &
+		0.55 &
+		0.579 &
+		0.55 &
+		0.401 &
+		0.42 &
+		\textless{}0.001 &
+		0.98 \\
+		\textbf{N-gram IDF} &
+		\textless{}0.001 &
+		1.00 &
+		0.298 &
+		0.40 &
+		0.626 &
+		0.45 &
+		&
+		&
+		1.000 &
+		0.50 &
+		0.828 &
+		0.48 &
+		0.256 &
+		0.39 &
+		\textless{}0.001 &
+		0.98 \\
+		\textbf{TF-IDF} &
+		\textless{}0.001 &
+		1.00 &
+		0.298 &
+		0.40 &
+		0.626 &
+		0.45 &
+		1.000 &
+		0.50 &
+		&
+		&
+		0.829 &
+		0.48 &
+		0.256 &
+		0.39 &
+		\textless{}0.001 &
+		0.98 \\
+		\textbf{Word2Vec} &
+		\textless{}0.001 &
+		1.00 &
+		0.440 &
+		0.43 &
+		0.579 &
+		0.45 &
+		0.829 &
+		0.52 &
+		0.829 &
+		0.52 &
+		&
+		&
+		0.336 &
+		0.41 &
+		\textless{}0.001 &
+		0.98 \\
+		\textbf{CNN} &
+		\textless{}0.001 &
+		0.97 &
+		0.914 &
+		0.49 &
+		0.401 &
+		0.58 &
+		0.256 &
+		0.61 &
+		0.256 &
+		0.61 &
+		0.336 &
+		0.59 &
+		&
+		&
+		0.000 &
+		0.94 \\
+		\textbf{BERT} &
+		\textless{}0.001 &
+		0.96 &
+		0 &
+		0.06 &
+		\textless{}0.001 &
+		0.02 &
+		\textless{}0.001 &
+		0.02 &
+		\textless{}0.001 &
+		0.02 &
+		\textless{}0.001 &
+		0.02 &
+		0.000 &
+		0.06 &
+		&
+		\\ \bottomrule
+	\end{tabular}
+\end{table}
+
+\begin{table}[]
+	\centering
+	\caption{\newtext{Comparison on classification benchmarks using Wilcoxon test and $\hat{A}_{XY}$ effect size (on the right column with 2 decimal points) on Moodle project.}}
+	\label{tab:wilcoxon-moodle}
+	\begin{tabular}{@{}ccccccccccccccccc@{}}
+		\toprule
+		\textbf{vs} &
+		\multicolumn{2}{c}{\textbf{Random}} &
+		\multicolumn{2}{c}{\textbf{Freq.}} &
+		\multicolumn{2}{c}{\textbf{BoW}} &
+		\multicolumn{2}{c}{\textbf{N-gram IDF}} &
+		\multicolumn{2}{c}{\textbf{TF-IDF}} &
+		\multicolumn{2}{c}{\textbf{Word2Vec}} &
+		\multicolumn{2}{c}{\textbf{CNN}} &
+		\multicolumn{2}{c}{\textbf{BERT}} \\ \midrule
+		\textbf{Random} &
+		&
+		&
+		0.000 &
+		0.09 &
+		\textless{}0.001 &
+		0.04 &
+		\textless{}0.001 &
+		0.03 &
+		\textless{}0.001 &
+		0.04 &
+		0.000 &
+		0.08 &
+		0.000 &
+		0.13 &
+		0.946 &
+		0.50 \\
+		\textbf{Freq.} &
+		0.000 &
+		0.91 &
+		&
+		&
+		0.499 &
+		0.44 &
+		0.882 &
+		0.49 &
+		0.499 &
+		0.44 &
+		0.273 &
+		0.40 &
+		0.946 &
+		0.51 &
+		0.000 &
+		0.91 \\
+		\textbf{BoW} &
+		\textless{}0.001 &
+		0.96 &
+		0.499 &
+		0.56 &
+		&
+		&
+		0.543 &
+		0.56 &
+		1.000 &
+		0.50 &
+		0.989 &
+		0.50 &
+		0.490 &
+		0.57 &
+		0.000 &
+		0.95 \\
+		\textbf{N-gram IDF} &
+		\textless{}0.001 &
+		0.98 &
+		0.882 &
+		0.52 &
+		0.543 &
+		0.44 &
+		&
+		&
+		0.543 &
+		0.44 &
+		0.579 &
+		0.45 &
+		0.839 &
+		0.52 &
+		\textless{}0.001 &
+		0.97 \\
+		\textbf{TF-IDF} &
+		\textless{}0.001 &
+		0.96 &
+		0.499 &
+		0.56 &
+		1.000 &
+		0.50 &
+		0.543 &
+		0.56 &
+		&
+		&
+		0.989 &
+		0.50 &
+		0.490 &
+		0.57 &
+		0.000 &
+		0.95 \\
+		\textbf{Word2Vec} &
+		0.000 &
+		0.92 &
+		0.273 &
+		0.60 &
+		0.989 &
+		0.50 &
+		0.579 &
+		0.55 &
+		0.989 &
+		0.50 &
+		&
+		&
+		0.379 &
+		0.58 &
+		0.000 &
+		0.92 \\
+		\textbf{CNN} &
+		0.000 &
+		0.87 &
+		0.946 &
+		0.49 &
+		0.490 &
+		0.44 &
+		0.839 &
+		0.48 &
+		0.490 &
+		0.44 &
+		0.379 &
+		0.42 &
+		&
+		&
+		0.000 &
+		0.88 \\
+		\textbf{BERT} &
+		0.946 &
+		0.51 &
+		0.000 &
+		0.10 &
+		0.000 &
+		0.05 &
+		\textless{}0.001 &
+		0.03 &
+		0.000 &
+		0.05 &
+		0.000 &
+		0.08 &
+		0.000 &
+		0.12 &
+		&
+		\\ \bottomrule
+	\end{tabular}	
+\end{table}
+\end{landscape}
+
+%What are the learned insights of performing the evaluation? In terms of MRR and recall, BoW, N-Gram, and TF-IDF seem to be the top 3. It would be valuable to understand the tradeoffs of implementing those in practice. Is there a significant gain in N-Gram over the simple BoW? What about the computation time required to run N-Gram IDF over large corpus of data? The authors could provide further insight, and recommend when to use which, or is it "worth to even bother" with more sophisticated ML techniques, or should we simply use BoW in such application scenarios?

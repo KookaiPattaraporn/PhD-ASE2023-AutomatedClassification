@@ -1,0 +1,12 @@
+\section{Threats to validity}  \label{sec:threats}
+
+There are several threats to validity of our study which are discussed below. 
+
+\subsection{Construct validity}
+We performed the privacy requirements classification in issue reports of Google Chrome and Moodle projects. The dataset used in our study was publicly published and have been used by previous work \cite{Sangaroonsilp2023}. The issue reports in that dataset have been extracted from the active issue tracking systems of two large and widely-used software systems. Both projects have a strong emphasis on privacy concerns. We however acknowledge that it is a threat to construct validity as we rely on the labelled dataset of the previous study. Since the dataset involved with subjective judgements and was manually annotated, it may contain errors caused by human biases. 
+
+\subsection{Internal validity}
+We are also aware that the configurations of parameters could affect the performance of the techniques applied in the experiments. We tried to minimise this threat by setting the same values for all the common parameters across different techniques in both Google Chrome and Moodle projects. In addition, our dataset has long tail distributions which may flavour the performance of the frequency-based method. However, we have used a range of different text features to perform the experiments and compare their performance. The results show that several text features performed better than the frequency-based method.
+
+\subsection{External validity}
+We acknowledge that our dataset may not be representative of other software applications or software applications in other domains. Further investigation is required to explore other projects in different domains (e.g. e-health software systems and mobile applications), which will be explored in our future work. 

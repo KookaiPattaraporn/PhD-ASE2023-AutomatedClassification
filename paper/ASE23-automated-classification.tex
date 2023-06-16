@@ -1,0 +1,78 @@
+%%\documentclass[pdflatex,sn-basic]{sn-jnl}% Basic Springer Nature Reference Style/Chemistry Reference Style
+%%\documentclass[sn-basic]{sn-jnl}% Basic Springer Nature Reference Style/Chemistry Reference Style
+\documentclass[sn-mathphys]{sn-jnl}% Math and Physical Sciences Reference Style
+%%\documentclass[sn-aps]{sn-jnl}% American Physical Society (APS) Reference Style
+%%\documentclass[sn-vancouver]{sn-jnl}% Vancouver Reference Style
+%\documentclass[sn-apa]{sn-jnl}% APA Reference Style
+%%\documentclass[sn-chicago]{sn-jnl}% Chicago-based Humanities Reference Style
+%%\documentclass[sn-standardnature]{sn-jnl}% Standard Nature Portfolio Reference Style
+%\documentclass[default]{sn-jnl}% Default
+%%\documentclass[default,iicol]{sn-jnl}% Default with double column layout
+
+%%%% Standard Packages
+\usepackage{url}
+\usepackage{multirow}
+\usepackage{multicol}
+%\usepackage{tikz}
+\usepackage{booktabs}
+\usepackage{lscape}
+\usepackage{enumitem}
+\usepackage{balance}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{amsmath}
+\usepackage{amsbsy}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{textcomp}
+\usepackage{enumitem}
+\usepackage{eurosym} %\EUR{arg1}
+\usepackage{natbib}
+%%%%
+
+\newcommand{\newtext}[1]{\textcolor{blue}{#1}}
+\newcommand{\todo}[1]{\textbf{\color{red}{TODO: #1}}}
+
+\jyear{2021}%
+
+\begin{document}
+
+%\title[Evaluating different approaches for classifying privacy requirements in issue reports]{Evaluating different approaches for classifying privacy requirements in issue reports}
+
+%\title[Automated classification of privacy requirements in issue reports]{Automated classification of privacy requirements in issue reports}
+\title{\newtext{An Empirical Study of Automated Privacy Requirements Classification in Issue Reports}}
+
+\author*[1]{\fnm{Pattaraporn} \sur{Sangaroonsilp}}\email{ps642@uowmail.edu.au}
+
+\author[2]{\fnm{Morakot} \sur{Choetkiertikul}}\email{morakot.cho@mahidol.ac.th}
+
+\author[1]{\fnm{Hoa} \sur{Khanh Dam}}\email{hoa@uow.edu.au}
+
+\author[1]{\fnm{Aditya} \sur{Ghose}}\email{aditya@uow.edu.au}
+
+\affil*[1]{\orgdiv{School of Computing and Information Technology, Faculty of Engineering and Information Sciences}, \orgname{University of Wollongong}, \orgaddress{\street{Northfields Avenue}, \city{Wollongong}, \postcode{2500}, \state{NSW}, \country{Australia}}}
+
+\affil[2]{\orgdiv{Faculty of Information and Communication Technology}, \orgname{Mahidol University}, \orgaddress{\street{Phuttamonthon Sai 4}, \city{Salaya}, \postcode{73170}, \state{Nakhon Pathom}, \country{Thailand}}}
+
+
+\abstract{The recent advent of data protection laws and regulations has emerged to protect privacy and personal information of individuals. As the cases of privacy breaches and vulnerabilities are rapidly increasing, people are aware and more concerned about their privacy. These bring a significant attention to software development teams to address privacy concerns in developing software applications. As today's software development adopts an agile, issue-driven approach, issues in an issue tracking system become a centralised pool that gathers new requirements, requests for modification and all the tasks of the software project. Hence, establishing an alignment between those issues and privacy requirements is an important step in developing privacy-aware software systems. This alignment also facilitates privacy compliance checking which may be required as an underlying part of regulations for organisations. However, manually establishing those alignments is labour intensive and time consuming. In this paper, we explore a wide range of machine learning and natural language processing techniques which can automatically classify privacy requirements in issue reports. We employ six popular techniques namely Bag-of-Words (BoW), N-gram Inverse Document Frequency (N-gram IDF), Term Frequency-Inverse Document Frequency (TF-IDF), Word2Vec, Convolutional Neural Network (CNN) and Bidirectional Encoder Representations from Transformers (BERT) to perform the classification on privacy-related issue reports in Google Chrome and Moodle projects. The evaluation showed that BoW, N-gram IDF, TF-IDF and Word2Vec techniques are suitable for classifying privacy requirements in those issue reports. In addition, N-gram IDF is the best performer in both projects.}
+
+
+\keywords{Privacy, Issue reports, Issues classification, Machine Learning, Natural Language Processing, Deep learning models, Privacy issues classification}
+
+
+\maketitle
+
+\input{sections/1-intro}
+\input{sections/2-background}
+\input{sections/3-approach}
+\input{sections/4-evaluation}
+\input{sections/5-threats}
+\input{sections/6-conclusion}
+\input{sections/7-appendix}
+
+\bibliography{MSR21,ICSE2020_kookai_ref,privacy-requirements,morakot}
+
+\end{document}
